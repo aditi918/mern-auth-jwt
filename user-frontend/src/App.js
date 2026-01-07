@@ -1,23 +1,56 @@
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
+
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
-import ProtectedRoute from "./components/ProtectedRoute";
+
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
 
 function App() {
   return (
     <>
       <Navbar />
+
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        {/* Home = Dashboard (Protected) */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Login */}
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+
+        {/* Signup */}
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          }
+        />
+
+        {/* Dashboard */}
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute>
+            <PrivateRoute>
               <Dashboard />
-            </ProtectedRoute>
+            </PrivateRoute>
           }
         />
       </Routes>
