@@ -5,9 +5,10 @@ function Navbar() {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+  localStorage.removeItem("token");
+  localStorage.removeItem("userEmail"); // ✅ ADD THIS LINE
+  navigate("/login");
+};
 
   return (
     <nav style={styles.navbar}>
